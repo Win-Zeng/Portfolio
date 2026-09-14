@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Weihang Zeng — computational design and architecture portfolio. MSc Architectural Computation, the Bartlett, UCL.">
+<style>html{color-scheme:dark}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Weihang Zeng Portfolio</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap">
+<style>
+:root{
+  --ink:#080a0e;
+  --panel:#0f131a;
+  --panel-2:#151b23;
+  --line:#222a35;
+  --line-soft:#1a212a;
+  --text:#dbe2ec;
+  --text-dim:#9aa5b4;
+  --muted:#6d7888;
+  --accent:#e4863c;
+  --accent-soft:rgba(228,134,60,.16);
+  --cool:#6fa8dc;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --disp:"Archivo","IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--ink);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.wrap{max-width:1300px;margin:0 auto;padding-inline:24px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky;top:0;z-index:60;
+  background:rgba(8,10,14,.86);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line-soft);
+}
+.topbar .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;height:58px;
+}
+.brand{font-family:var(--disp);font-weight:800;letter-spacing:.08em;font-size:14px;text-transform:uppercase}
+.brand span{color:var(--accent)}
+.topnav{display:flex;gap:22px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim)}
+.topnav a:hover{color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line-soft)}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(to right,rgba(255,255,255,.05) 0 1px,transparent 1px 56px),
+    repeating-linear-gradient(to bottom,rgba(255,255,255,.05) 0 1px,transparent 1px 56px);
+  -webkit-mask-image:radial-gradient(120% 90% at 15% 0%,#000 0%,transparent 72%);
+  mask-image:radial-gradient(120% 90% at 15% 0%,#000 0%,transparent 72%);
+  pointer-events:none;
+}
+.hero .wrap{position:relative;padding-block:clamp(52px,9vw,104px) clamp(44px,6vw,72px)}
+.eyebrow{
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 22px;
+}
+h1{
+  font-family:var(--disp);font-weight:800;
+  font-size:clamp(38px,7.4vw,86px);
+  line-height:.98;letter-spacing:-.025em;margin:0;
+  text-wrap:balance;
+}
+h1 em{font-style:normal;color:var(--muted)}
+.role{
+  font-family:var(--mono);font-size:clamp(12px,1.4vw,14px);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);
+  margin:22px 0 0;
+}
+.bio{max-width:64ch;margin:26px 0 0;color:var(--text-dim);font-size:clamp(15px,1.5vw,17px)}
+.bio strong{color:var(--text);font-weight:500}
+
+.herofacts{
+  display:grid;gap:0;margin-top:44px;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  border-top:1px solid var(--line);
+}
+.fact{padding:18px 22px;border-right:1px solid var(--line-soft)}
+.fact:first-child{padding-left:0}
+.fact:last-child{border-right:0}
+.fact dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.fact dd{margin:0;font-size:14px;line-height:1.55;color:var(--text)}
+.fact dd small{display:block;color:var(--muted);font-size:12.5px}
+
+.contactrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.cbtn{
+  display:inline-flex;align-items:center;gap:9px;
+  border:1px solid var(--line);background:var(--panel);
+  padding:9px 15px;border-radius:2px;
+  font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--text-dim);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.cbtn i{font-style:normal;color:var(--accent);font-size:11px;letter-spacing:.14em}
+.cbtn:hover{border-color:var(--accent);color:var(--text);background:var(--accent-soft)}
+.cbtn[data-todo]{opacity:.55}
+
+/* ---------- section headers ---------- */
+.setlead{
+  display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;
+  padding-block:54px 26px;
+}
+.setlead h2{
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  letter-spacing:.02em;font-size:clamp(20px,2.6vw,27px);margin:0;
+}
+.setlead .tick{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--accent);text-transform:uppercase}
+.setlead .rule{flex:1;height:1px;background:var(--line);min-width:40px}
+.setlead .count{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.14em}
+
+/* ---------- project grid ---------- */
+.grid{display:grid;gap:30px;grid-template-columns:repeat(auto-fill,minmax(340px,1fr))}
+.card{display:block;position:relative}
+.frame{
+  position:relative;aspect-ratio:16/10;overflow:hidden;
+  background:#0b0f14;border:1px solid var(--line);
+  transition:border-color .25s;
+}
+.frame img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1),filter .3s;filter:saturate(.92)}
+.frame::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(8,10,14,0) 55%,rgba(8,10,14,.55) 100%);
+  pointer-events:none;
+}
+.tick-tl,.tick-br{position:absolute;width:13px;height:13px;pointer-events:none;opacity:0;transition:opacity .25s}
+.tick-tl{top:7px;left:7px;border-top:1px solid var(--accent);border-left:1px solid var(--accent)}
+.tick-br{bottom:7px;right:7px;border-bottom:1px solid var(--accent);border-right:1px solid var(--accent)}
+.card:hover .frame{border-color:#3d4a5a}
+.card:hover .frame img{transform:scale(1.035);filter:saturate(1)}
+.card:hover .tick-tl,.card:hover .tick-br{opacity:1}
+.cardbody{padding-top:15px}
+.cnum{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--accent)}
+.card h3{
+  font-family:var(--disp);font-weight:700;text-transform:uppercase;
+  font-size:19px;line-height:1.2;letter-spacing:.005em;margin:7px 0 0;
+}
+.card:hover h3{color:var(--accent)}
+.csub{margin:6px 0 0;color:var(--text-dim);font-size:14px;line-height:1.45}
+.cmeta{
+  margin-top:11px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+  display:flex;gap:9px;flex-wrap:wrap;
+}
+.cmeta span::after{content:" ·";color:var(--line)}
+.cmeta span:last-child::after{content:""}
+
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}
+.tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;
+  color:var(--text-dim);border:1px solid var(--line);
+  padding:3px 8px;border-radius:2px;background:var(--panel);
+}
+
+/* ---------- detail ---------- */
+.back{
+  display:inline-flex;align-items:center;gap:9px;margin-top:38px;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+}
+.back:hover{color:var(--accent)}
+.dhead{padding-block:26px 0}
+.dnum{font-family:var(--disp);font-weight:800;font-size:clamp(46px,9vw,104px);line-height:.85;color:var(--panel-2);letter-spacing:-.04em}
+.dtitle{
+  font-family:var(--disp);font-weight:800;text-transform:uppercase;
+  font-size:clamp(27px,4.4vw,50px);line-height:1.03;letter-spacing:-.015em;
+  margin:-.35em 0 0;text-wrap:balance;
+}
+.dsub{margin:14px 0 0;color:var(--accent);font-size:clamp(15px,1.8vw,19px);max-width:56ch;line-height:1.4}
+.dcols{
+  display:grid;gap:46px;margin-top:40px;padding-bottom:42px;
+  border-bottom:1px solid var(--line);
+  grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
+}
+.abstract{font-size:16.5px;color:var(--text-dim);max-width:66ch;margin:0}
+.abstract::first-line{color:var(--text)}
+.spec{margin:0;border-top:1px solid var(--line)}
+.spec div{display:grid;grid-template-columns:88px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line-soft)}
+.spec dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+.spec dd{margin:0;font-size:13.5px;line-height:1.5;color:var(--text)}
+
+.plates{padding-block:40px 10px;display:flex;flex-direction:column;gap:44px}
+.plate{margin:0}
+.platebar{
+  display:flex;justify-content:space-between;align-items:baseline;gap:14px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:13px;
+}
+.platebar b{color:var(--accent);font-weight:500}
+.plate button{
+  display:block;width:100%;padding:0;border:1px solid var(--line);background:#fff;
+  cursor:zoom-in;line-height:0;
+}
+.plate button:hover{border-color:#3d4a5a}
+
+.pager{
+  display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  border-top:1px solid var(--line);margin-top:46px;padding-block:30px 70px;
+}
+.pager a{max-width:46%}
+.pager .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.pager .nm{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:17px;margin-top:6px;display:block}
+.pager a:hover .nm{color:var(--accent)}
+.pager .r{text-align:right;margin-left:auto}
+
+/* ---------- lightbox ---------- */
+.lb{
+  position:fixed;inset:0;z-index:120;background:rgba(4,6,9,.96);
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  overflow:auto;cursor:zoom-out;
+}
+.lb img{max-width:100%;height:auto;border:1px solid var(--line)}
+.lb .close{
+  position:fixed;top:14px;right:16px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--text-dim);
+  border:1px solid var(--line);background:var(--panel);padding:8px 13px;cursor:pointer;border-radius:2px;
+}
+.lb .close:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line-soft);margin-top:70px}
+footer .wrap{
+  padding-block:30px 46px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);
+}
+footer a:hover{color:var(--accent)}
+
+@media (max-width:860px){
+  .dcols{grid-template-columns:1fr;gap:30px}
+  .fact{border-right:0;border-bottom:1px solid var(--line-soft);padding-inline:0}
+  .grid{gap:26px;grid-template-columns:1fr}
+  .topnav{gap:15px;font-size:10.5px}
+  .wrap{padding-inline:18px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#/">Weihang Zeng<span>.</span></a>
+    <nav class="topnav">
+      <a href="#/">Work</a>
+      <a href="#about">About</a>
+      <a href="mailto:winnieofftr@gmail.com">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero" id="about">
+    <div class="wrap">
+      <p class="eyebrow">Selected Works 2022 — 2026</p>
+      <h1>Computational<br>Design <em>&amp;</em> Architecture</h1>
+      <p class="role">Weihang Zeng — MSc Architectural Computation, the Bartlett, UCL</p>
+      <p class="bio">I build <strong>generative systems</strong> that bring environmental performance, machine learning and spatial reasoning into the earliest stage of architectural design — voxel massing evolved under multi-objective optimisation, neural networks used as floor-plan generators, agent simulations translated into buildable form, and street-level computer vision applied to urban safety. Trained as an architect, I write the tools as well as the designs they produce.</p>
+
+      <dl class="herofacts">
+        <div class="fact">
+          <dt>Education</dt>
+          <dd>MSc Architectural Computation<small>The Bartlett, UCL · 2025 – 2026</small></dd>
+        </div>
+        <div class="fact">
+          <dt>Previously</dt>
+          <dd>BArch Architecture<small>South China University of Technology · 2020 – 2025</small></dd>
+        </div>
+        <div class="fact">
+          <dt>Toolkit</dt>
+          <dd>Python · C# · Grasshopper · Rhino<small>Pymoo · Wallacei · Ladybug · Karamba3D · CycleGAN</small></dd>
+        </div>
+        <div class="fact">
+          <dt>Based in</dt>
+          <dd>London, UK<small>Open to computational design &amp; applied research roles</small></dd>
+        </div>
+      </dl>
+
+      <div class="contactrow">
+        <a class="cbtn" href="mailto:winnieofftr@gmail.com"><i>Email</i> winnieofftr@gmail.com</a>
+        <a class="cbtn" href="tel:+447940437915"><i>Tel</i> +44 7940 437915</a>
+        <a class="cbtn" data-todo href="#/" id="li"><i>LinkedIn</i> add link</a>
+        <a class="cbtn" data-todo href="#/" id="gh"><i>GitHub</i> add link</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" id="sets"></div>
+</main>
+
+<main id="detail" hidden></main>
+
+<footer>
+  <div class="wrap">
+    <span>Weihang Zeng · Portfolio 2026</span>
+    <span><a href="mailto:winnieofftr@gmail.com">winnieofftr@gmail.com</a></span>
+  </div>
+</footer>
+
+<script>
+const P = [
+{
+  id:"01", set:"A",
+  title:"Emergence Tower",
+  sub:"A multi-algorithm generative pipeline for high-rise design",
+  year:"2026.03",
+  context:"Digital Ecologies — MSc Architectural Computation, the Bartlett, UCL",
+  role:"Collaborative academic work",
+  tutors:"Vishu Bhooshan, Tommaso Casucci, Sherif Tarabishy, Adam Davis, Marcin Kosicki, Valentina Soana",
+  tags:["Solar Envelope","Stigmergy","Neural Network","A* Pathfinding","NSGA-II","ASF Selection"],
+  abstract:"This research introduces a neuroevolutionary framework that unifies environment-based building volume generation and floor-plan design for the early stage of high-rise housing. The pipeline combines solar envelope form finding, stigmergy-based programme distribution, a feedforward neural network for floor generation, a rule-based unit decoder, and A* pathfinding for corridors. NSGA-II optimises these components end-to-end across objectives such as fill ratio, compactness and circulation efficiency. Results show the system generating diverse tower and layout options while exposing trade-offs among competing criteria through Pareto-front exploration and ASF-based selection. Rather than offering one algorithmic solution, the study demonstrates the value of chaining specialised methods into a coherent workflow that supports architects.",
+  pages:[3,4,5,6,7]
+},
+{
+  id:"02", set:"A",
+  title:"Neuroevolutionary Tower Massing",
+  sub:"Genetic optimisation of voxel-based tower massing for building performance",
+  year:"2025.10",
+  context:"Digital Studio — MSc Architectural Computation, the Bartlett, UCL",
+  role:"Collaborative academic work",
+  tutors:"Sherif Tarabishy, Vishu Bhooshan, Tommaso Casucci, Adam Davis, Marcin Kosicki, Valentina Soana",
+  tags:["Neural Network","NSGA-II","Pymoo","Cyclops","Daylight","Radiation"],
+  abstract:"A neuroevolutionary framework for early-stage high-rise design, combining a generative neural network with a multi-objective genetic algorithm (NSGA-II) to optimise voxel-based tower massing. Built from customised components in Python and Pymoo and coupled with Cyclops, the workflow is tested on a site in London's Isle of Dogs, where dense high-rise development and rising temperatures heighten the need for environmental performance. The NN–GA loop efficiently produces a diverse Pareto set of tower morphologies that balance reduced solar gains against improved daylight access while meeting volumetric and façade-density targets — demonstrating the potential of neural networks as generative engines for performance-driven form-finding.",
+  pages:[8,9,10,11]
+},
+{
+  id:"03", set:"A",
+  title:"Walking Canopy",
+  sub:"A crowd movement representation",
+  year:"2026.04",
+  context:"Morphogenetic Programming — MSc Architectural Computation, the Bartlett, UCL",
+  role:"Individual academic work",
+  tutors:"Martha Tsigkari, Sherif Tarabishy",
+  tags:["Proxemics","Boids","Perlin Noise","C#","Real-time Mesh"],
+  abstract:"This project adapts the theory of proxemics to translate an invisible social dynamic into architectural form. Boids — each carrying a personal-space radius relative to the number of neighbouring agents — simulate the gathering and dispersal of people across an urban space. Their movement, guided by a Perlin noise flow field and by local density, continuously deforms a canopy surface above them: where people cluster, peaks rise and merge; where they disperse, the surface falls quiet. The canopy becomes a real-time spatial record of human proximity, written from scratch in C#.",
+  pages:[12,13]
+},
+{
+  id:"04", set:"A",
+  title:"Unequal Illumination, Unseen Crashes",
+  sub:"Does the night light environment co-determine the urban factors affecting traffic crashes?",
+  year:"2025.06",
+  context:"DigitalFUTURES Workshop 26 — Tongji University",
+  role:"Collaborative academic work",
+  tutors:"Yuankai Wang (HKU), Waishan Qiu (HKU)",
+  tags:["CycleGAN","Semantic Segmentation","Street View Imagery","Regression","Urban Safety"],
+  abstract:"This research tests the hypothesis that eye-level night illumination metrics matter more than top-view lighting in determining the factors that affect traffic crashes in New York City. Using CycleGAN, hundreds of street view images are translated into night street views, then processed through semantic segmentation and light-spot analysis. Combined with traffic injury data, three regression models yield a highest correlation coefficient of R² = 0.290 across all variables, highlighting the respective value of each metric in understanding urban safety patterns.",
+  pages:[14,15,16]
+},
+{
+  id:"05", set:"A",
+  title:"Performance-driven Passive Shading",
+  sub:"Shading design and metal fabrication for an over-heating classroom",
+  year:"2025.05",
+  context:"Graduation Design — BArch Architecture, SCUT",
+  role:"Individual work",
+  tutors:"Pin Su, Guanqiu Zhong, Lu Xiong",
+  tags:["Genetic Algorithm","Wallacei","Karamba3D","CNC","Metal Fabrication","DGP / UDI / PMV"],
+  abstract:"A passive shading system for an existing architecture school building in Guangzhou, addressing over-heating in west-facing classrooms. Working in aluminium, the project carries out a sustained exploration of advanced metal fabrication — crease printing, double-curvature bending, rivet-free connections — alongside a genetic algorithm optimisation pipeline in Wallacei that iterates shading angles against glare, daylight and thermal objectives. Structural behaviour under Guangzhou's summer wind pressures is verified in Karamba3D, and pre/post comparisons of DF, UDI, DGP, radiant temperature and heat sensation quantify the improvement.",
+  pages:[17,18,19]
+},
+{
+  id:"06", set:"B",
+  title:"Intangible Space",
+  sub:"An interactive place based on pedestrians' real-time movement",
+  year:"2024.09",
+  context:"Digital Workshop — BArch Architecture, SCUT",
+  role:"Team academic work",
+  tutors:"Guanqiu Zhong",
+  tags:["Interactive Installation","Agent-based Design","Kinetic Structure","Public Space"],
+  abstract:"Completely open space creates the greatest confusion: the uncertainty of public space poses a severe challenge of spatial demarcation. Rigid, fixed division struggles to adapt to an informationised and fragmented society — division must instead emerge as a smarter medium that responds to contemporary, random behaviour. The traditional means of separating space, wall and glass, are redefined here as something transparent, intangible, sensible and agent-based, forming a new organisation of spatial activity across the site.",
+  pages:[20,21,22]
+},
+{
+  id:"07", set:"B",
+  title:"'X' Hub",
+  sub:"The convergence of transports",
+  year:"2022.03",
+  context:"Architecture Design Studio — BArch Architecture, SCUT",
+  role:"Individual academic work",
+  tutors:"Shaopang Zhuang",
+  tags:["Transport Interchange","Flow Analysis","Urban Interface","Physical Model"],
+  abstract:"A study of urban transportation points, focused on the subway — the largest mode of transport in contemporary China. Subway entrances and exits form the interface between underground and ground transportation, yet contemporary Chinese urban design gives this point comparatively little thought. Can existing station entrances meet the needs of contemporary travel? Balancing and satisfying several converging traffic flows through this single point becomes the core of the design.",
+  pages:[23,24]
+},
+{
+  id:"08", set:"B",
+  title:"The Dam",
+  sub:"An adaptive city for metropolitan expansion",
+  year:"2024.03",
+  context:"Architecture Design Studio — BArch Architecture, SCUT · Marine East, Singapore",
+  role:"Individual academic work",
+  tutors:"WANG Jing",
+  tags:["Urban Design","Land Reclamation","Sectional City","Singapore"],
+  abstract:"Over the past forty to fifty years Singapore has continuously reclaimed land from the sea, expanding its territory by a quarter. Excessive mining of sand and stone has damaged the surrounding natural environment; the shortage of sand and the city's growing need for space are the project's central contradictions. By building the city on the dam itself, more activity space is created from less reclaimed land: urban space, once divided horizontally by streets, is now divided vertically, with the upper and lower parts of the dike city carrying different working and living functions and slow streets running between them.",
+  pages:[25,26,27,28]
+}
+];
+
+const SETS = [
+  {key:"A", n:"Set A", title:"Computational Design", note:"Generative systems, optimisation and machine learning"},
+  {key:"B", n:"Set B", title:"Architecture, Urban & Installation", note:"Design studio and interactive work"}
+];
+
+const pad = n => String(n).padStart(2,"0");
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+/* ---------- home ---------- */
+function renderHome(){
+  document.getElementById("sets").innerHTML = SETS.map(s=>{
+    const items = P.filter(p=>p.set===s.key);
+    return `
+    <section class="setblock">
+      <div class="setlead">
+        <span class="tick">${s.n}</span>
+        <h2>${s.title}</h2>
+        <span class="rule"></span>
+        <span class="count">${pad(items.length)} projects · ${esc(s.note)}</span>
+      </div>
+      <div class="grid">
+        ${items.map(p=>`
+          <a class="card" href="#/p/${p.id}">
+            <div class="frame">
+              <img src="img/cards/c${p.id}.jpg" alt="${esc(p.title)}" loading="lazy">
+              <span class="tick-tl"></span><span class="tick-br"></span>
+            </div>
+            <div class="cardbody">
+              <span class="cnum">${p.id}</span>
+              <h3>${esc(p.title)}</h3>
+              <p class="csub">${esc(p.sub)}</p>
+              <div class="cmeta"><span>${p.year}</span><span>${esc(p.role.replace(/ academic work| work/,""))}</span><span>${p.pages.length} sheets</span></div>
+              <div class="tags">${p.tags.slice(0,4).map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+            </div>
+          </a>`).join("")}
+      </div>
+    </section>`;
+  }).join("");
+}
+
+/* ---------- detail ---------- */
+function renderDetail(p){
+  const i = P.indexOf(p);
+  const prev = P[(i-1+P.length)%P.length], next = P[(i+1)%P.length];
+  return `
+  <div class="wrap">
+    <a class="back" href="#/">← All projects</a>
+    <div class="dhead">
+      <div class="dnum">${p.id}</div>
+      <h1 class="dtitle">${esc(p.title)}</h1>
+      <p class="dsub">${esc(p.sub)}</p>
+    </div>
+    <div class="dcols">
+      <p class="abstract">${esc(p.abstract)}</p>
+      <dl class="spec">
+        <div><dt>Year</dt><dd>${p.year}</dd></div>
+        <div><dt>Context</dt><dd>${esc(p.context)}</dd></div>
+        <div><dt>Role</dt><dd>${esc(p.role)}</dd></div>
+        <div><dt>Tutors</dt><dd>${esc(p.tutors)}</dd></div>
+        <div><dt>Methods</dt><dd>${p.tags.map(t=>esc(t)).join(" · ")}</dd></div>
+      </dl>
+    </div>
+    <div class="plates">
+      ${p.pages.map((pg,n)=>`
+        <figure class="plate">
+          <figcaption class="platebar">
+            <b>Plate ${pad(n+1)} / ${pad(p.pages.length)}</b>
+            <span>${esc(p.title)} — sheet p.${pad(pg)}</span>
+          </figcaption>
+          <button type="button" data-full="img/pages/p-${pad(pg)}.jpg" aria-label="Enlarge plate ${n+1}">
+            <img src="img/pages/p-${pad(pg)}.jpg" alt="${esc(p.title)} sheet ${n+1}" loading="${n<1?"eager":"lazy"}" decoding="async">
+          </button>
+        </figure>`).join("")}
+    </div>
+    <nav class="pager">
+      <a href="#/p/${prev.id}"><span class="lbl">← Previous</span><span class="nm">${esc(prev.title)}</span></a>
+      <a class="r" href="#/p/${next.id}"><span class="lbl">Next →</span><span class="nm">${esc(next.title)}</span></a>
+    </nav>
+  </div>`;
+}
+
+/* ---------- routing ---------- */
+const home = document.getElementById("home"), detail = document.getElementById("detail");
+function route(){
+  const m = location.hash.match(/^#\/p\/(\d+)/);
+  const p = m && P.find(x=>x.id===m[1]);
+  if(p){
+    detail.innerHTML = renderDetail(p);
+    detail.hidden = false; home.hidden = true;
+    document.title = p.title + " — Weihang Zeng";
+  }else{
+    detail.hidden = true; home.hidden = false;
+    document.title = "Weihang Zeng Portfolio";
+  }
+  window.scrollTo(0,0);
+}
+addEventListener("hashchange", route);
+renderHome();
+route();
+
+/* ---------- lightbox ---------- */
+let box = null;
+function closeBox(){ if(box){ box.remove(); box=null; document.body.style.overflow=""; } }
+addEventListener("click", e=>{
+  const b = e.target.closest(".plate button");
+  if(!b) return;
+  closeBox();
+  box = document.createElement("div");
+  box.className = "lb";
+  box.innerHTML = `<button class="close" type="button">Close ✕</button><img src="${b.dataset.full}" alt="">`;
+  box.addEventListener("click", closeBox);
+  document.body.appendChild(box);
+  document.body.style.overflow = "hidden";
+});
+addEventListener("keydown", e=>{ if(e.key==="Escape") closeBox(); });
+</script>
+
+</body>
+</html>
